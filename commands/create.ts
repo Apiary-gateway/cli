@@ -3,16 +3,14 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { updateAPIKeys } from '../utils/updateAPIKeys';
-import { inherits } from 'util';
 
+const stackPath = path.join(os.homedir(), 'aiGatewayStack', 'cdk-stack');
+const cdkRepo = 'https://github.com/Sporkway/gateway.git';
 
 export async function createStack() {
   // TODO - add checks that they have AWS CLI and CDK CLI(?) set up
   // TODO - bootstrap stack if needed
-  // TODO - make stackPath a hidden dir?
-  
-  const stackPath = path.join(os.homedir(), 'aiGatewayStack', 'cdk-stack');
-  const cdkRepo = 'https://github.com/Sporkway/gateway.git';
+  // TODO - make stackPath a hidden dir? and/or let user pass in a custom path?
 
   console.log(`📩 Cloning CDK stack into directory: ${stackPath}`);
   if (!fs.existsSync(stackPath)) {

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import { createStack } from '../commands/create';
+import { destroyStack } from '../commands/destroy';
 import { updateAPIKeys } from '../utils/updateAPIKeys';
-// import { destroyStack } from '../commands/destroy';
 
 const program = new Command();
 
@@ -16,10 +16,10 @@ program
   .description('Deploy the AI Gateway AWS CDK stack')
   .action(createStack);
 
-// program
-//   .command('destroy')
-//   .description('Destroy the AWS CDK stack')
-//   .action(destroyStack);
+program
+  .command('destroy')
+  .description('Destroy the AI Gateway AWS CDK stack')
+  .action(destroyStack);
 
 program
   .command('update-llm-api-keys')
