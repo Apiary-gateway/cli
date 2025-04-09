@@ -2,7 +2,8 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { updateAPIKeys } from '../utils/updateAPIKeys';
+import { updateAPIKeys } from './updateAPIKeys';
+import { getInitialGatewayKey } from '../utils/getInitialGatewayKey';
 
 const stackPath = path.join(os.homedir(), 'aiGatewayStack', 'cdk-stack');
 const cdkRepo = 'https://github.com/Sporkway/gateway.git';
@@ -28,6 +29,14 @@ export async function createStack() {
 
   console.log('🔐 Please enter your LLM provider API keys to be stored with Secrets Manager:');
   await updateAPIKeys();
+  console.log('✅ LLM provider API keys have been stored.');
 
+  const key = await getInitialGatewayKey();
+  console.log(
+    '🗝️ You can use this API key to begin making requests with AI Gateway ', 
+    '(please save this key securely for future reference): ',
+    key
+  );
+  
   console.log('🌠 Deployment complete!');
 }

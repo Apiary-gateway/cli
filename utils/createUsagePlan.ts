@@ -1,15 +1,8 @@
 import { 
   APIGatewayClient, 
   CreateUsagePlanCommand,
-  GetRestApisCommand, 
 } from "@aws-sdk/client-api-gateway";
-
-async function getGatewayId(client: APIGatewayClient) {
-  const command = new GetRestApisCommand({});
-  const response = await client.send(command);
-  const gateway = response.items?.find(gateway => gateway.name === 'AI Gateway API');
-  return gateway ? gateway.id : null;
-}
+import { getGatewayId } from "./getGatewayId";
 
 export async function createUsagePlan(
   name: string,
@@ -22,9 +15,6 @@ export async function createUsagePlan(
     const client = new APIGatewayClient();
 
     const gatewayId = await getGatewayId(client);
-    if (!getGatewayId) {
-      throw new Error('Could not find ID for API Gateway "AI Gateway API"');
-    }
 
     const input = quotaPeriod ? 
       {

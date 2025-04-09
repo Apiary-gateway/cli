@@ -2,8 +2,11 @@
 import { Command } from 'commander';
 import { createStack } from '../commands/create';
 import { destroyStack } from '../commands/destroy';
-import { updateAPIKeys } from '../utils/updateAPIKeys';
+import { updateAPIKeys } from '../commands/updateAPIKeys';
 import { createUsagePlanWithKey } from '../commands/createUsagePlanWithKey';
+import { getUsagePlans } from '../commands/getUsagePlans';
+import { deleteUsagePlan } from '../commands/deleteUsagePlan';
+import { deleteAPIKeys } from '../commands/deleteAPIKeys';
 
 const program = new Command();
 
@@ -27,9 +30,24 @@ program
   .description('Update stored API keys for LLM providers')
   .action(updateAPIKeys);
 
-  program
+program
+  .command('delete-llm-api-keys')
+  .description('Delete all stored API keys for LLM providers')
+  .action(deleteAPIKeys);
+
+program
   .command('create-usage-plan-with-key')
   .description('Create a new usage plan with an associated API key')
   .action(createUsagePlanWithKey);
+
+program
+  .command('get-usage-plans')
+  .description('View all usage plans associated with the AI Gateway')
+  .action(getUsagePlans);
+
+program
+  .command('delete-usage-plan')
+  .description('Delete a specific usage plan associated with the AI Gateway')
+  .action(deleteUsagePlan);
 
 program.parse(process.argv);
