@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import { createStack } from '../commands/create';
 import { destroyStack } from '../commands/destroy';
 import { updateAPIKeys } from '../utils/updateAPIKeys';
+import { createUsagePlanWithKey } from '../commands/createUsagePlanWithKey';
 
 const program = new Command();
 
@@ -25,5 +26,10 @@ program
   .command('update-llm-api-keys')
   .description('Update stored API keys for LLM providers')
   .action(updateAPIKeys);
+
+  program
+  .command('create-usage-plan-with-key')
+  .description('Create a new usage plan with an associated API key')
+  .action(createUsagePlanWithKey);
 
 program.parse(process.argv);

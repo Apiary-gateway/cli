@@ -4,6 +4,8 @@ import { SecretsManagerClient, UpdateSecretCommand } from '@aws-sdk/client-secre
 const client = new SecretsManagerClient();
 const SECRET_NAME = 'llm-provider-api-keys';
 
+// check how defaults show up
+
 export async function updateAPIKeys() {
   const apiKeys = await inquirer.prompt([
     {
@@ -11,25 +13,25 @@ export async function updateAPIKeys() {
       name: 'openaiAPIKey',
       message: 'Enter your OpenAI API key (optional): ',
       mask: '*',
+      default: 'empty-key',
     },
     {
       type: 'password',
       name: 'anthropicAPIKey',
       message: 'Enter your Anthropic API key (optional): ',
       mask: '*',
+      default: 'empty-key',
     },
     {
       type: 'password',
       name: 'geminiAPIKey',
       message: 'Enter your Gemini API key (optional): ',
       mask: '*',
+      default: 'empty-key',
     },
   ]);
 
-  let { openaiAPIKey, anthropicAPIKey, geminiAPIKey } = apiKeys;
-  openaiAPIKey = openaiAPIKey ? openaiAPIKey : 'empty-key';
-  anthropicAPIKey = anthropicAPIKey ? anthropicAPIKey : 'empty-key';
-  geminiAPIKey = geminiAPIKey ? geminiAPIKey : 'empty-key';
+  const { openaiAPIKey, anthropicAPIKey, geminiAPIKey } = apiKeys;
 
   try {
     const command = new UpdateSecretCommand({
