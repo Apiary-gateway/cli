@@ -8,6 +8,7 @@ import { getUsagePlans } from '../commands/getUsagePlans';
 import { deleteUsagePlan } from '../commands/deleteUsagePlan';
 import { deleteAPIKeys } from '../commands/deleteAPIKeys';
 import { getInitialGatewayKey } from '../utils/getInitialGatewayKey';
+import { editUsagePlan } from '../commands/editUsagePlan';
 
 const program = new Command();
 
@@ -50,5 +51,10 @@ program
   .command('delete-usage-plan')
   .description('Delete a specific usage plan associated with the AI Gateway')
   .action(deleteUsagePlan);
+
+program
+  .command('edit-usage-plan')
+  .description('Edit a specific usage plan associated with the AI Gateway')
+  .action(editUsagePlan);
 
 program.parse(process.argv);

@@ -1,10 +1,11 @@
 import { 
   APIGatewayClient, 
   CreateUsagePlanCommand,
+  CreateUsagePlanCommandInput,
 } from "@aws-sdk/client-api-gateway";
 import { getGatewayId } from "./getGatewayId";
 
-export async function createUsagePlan(
+export async function createUsagePlanUtil(
   name: string,
   rateLimit: number,
   burstLimit?: number,
@@ -16,34 +17,24 @@ export async function createUsagePlan(
 
     const gatewayId = await getGatewayId(client);
 
-    const input = quotaPeriod ? 
-      {
-        name,
-        apiStages: [{
-          apiId: `${gatewayId}`,
-          stage: 'dev',
-        }],
-        throttle: {
-          burstLimit,
-          rateLimit,
-        },
-        quota: { 
-          limit: quotaLimit,
-          period: quotaPeriod,
-        },
-      }
-      :
-      {
-        name,
-        apiStages: [{
-          apiId: `${gatewayId}`,
-          stage: 'dev',
-        }],
-        throttle: {
-          burstLimit,
-          rateLimit,
-        },
+    const input: CreateUsagePlanCommandInput = {
+      name,
+      apiStages: [{
+        apiId: `${gatewayId}`,
+        stage: 'dev',
+      }],
+      throttle: {
+        burstLimit,
+        rateLimit,
+      },
+    };
+    
+    if (quotaPeriod) {
+      input.quota = { 
+        limit: quotaLimit,
+        period: quotaPeriod,
       };
+    };
 
     const command = new CreateUsagePlanCommand(input);
   

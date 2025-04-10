@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import { createGatewayApiKey } from '../utils/createGatewayApiKey';
-import { createUsagePlan } from '../utils/createUsagePlan';
+import { createUsagePlanUtil } from '../utils/createUsagePlanUtil';
 import { addKeyToUsagePlan } from '../utils/addKeyToUsagePlan';
 
 export async function createUsagePlanWithKey() {
@@ -36,24 +36,25 @@ export async function createUsagePlanWithKey() {
     {
       type: 'number',
       name: 'burstLimit',
-      message: 'Enter a burst limit (optional): ',
+      message: 'Enter a burst limit (required): ',
     },
     {
       type: 'list',
       name: 'quotaPeriod',
-      message: 'Choose a quota period (optional): ',
+      message: 'Choose a quota period: ',
       choices: ['DAY', 'WEEK', 'MONTH', 'NONE'],
     },
     {
       type: 'number',
       name: 'quotaLimit',
-      message: 'Enter a quota limit (optional): ',
+      message: 'Enter a quota limit (required): ',
+      when: (answers) => answers.quotaPeriod !== 'NONE',
     },
   ]);
 
   let { usagePlanName, rateLimit, burstLimit, quotaPeriod, quotaLimit } = usagePlanSpecs;
   if (quotaPeriod === 'NONE') quotaPeriod = undefined;
-  const usagePlanResponse = await createUsagePlan(
+  const usagePlanResponse = await createUsagePlanUtil(
     usagePlanName, rateLimit, burstLimit, quotaLimit, quotaPeriod 
   );
   const usagePlanId = usagePlanResponse.id;
@@ -71,6 +72,6 @@ export async function createUsagePlanWithKey() {
       );
     }
   } catch (err) {
-    console.error(`❌ Failed to update LLM provider API keys: `, err);
+    console.error(`❌ Failed to create usage plan: `, err);
   }
 }
