@@ -7,6 +7,7 @@ import { createUsagePlanWithKey } from '../commands/createUsagePlanWithKey';
 import { getUsagePlans } from '../commands/getUsagePlans';
 import { deleteUsagePlan } from '../commands/deleteUsagePlan';
 import { deleteAPIKeys } from '../commands/deleteAPIKeys';
+import { getInitialGatewayKey } from '../utils/getInitialGatewayKey';
 
 const program = new Command();
 

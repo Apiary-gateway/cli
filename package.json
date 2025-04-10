@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-api-gateway": "^3.782.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.785.0",
     "@aws-sdk/client-secrets-manager": "^3.782.0",
     "commander": "^13.1.0",
     "inquirer": "^12.5.2"

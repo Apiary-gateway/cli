@@ -23,7 +23,7 @@ export async function deleteAPIKeys() {
   try {
     const command = new UpdateSecretCommand({
       SecretId: SECRET_NAME,
-      SecretString: '',
+      SecretString: '{"ANTHROPIC_API_KEY": "", "GEMINI_API_KEY": "", "OPENAI_API_KEY": ""}',
     });
 
     await client.send(command);
