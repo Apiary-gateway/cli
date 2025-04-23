@@ -13,18 +13,18 @@ import { editUsagePlan } from '../commands/editUsagePlan';
 const program = new Command();
 
 program
-  .name('ai-gateway')
-  .description('CLI for managing AI Gateway')
-  .version('0.1.0');
+  .name('apiary-cli')
+  .description('CLI for managing Apiary LLM Gateway')
+  .version('1.0.0');
 
 program
   .command('create')
-  .description('Deploy the AI Gateway AWS CDK stack')
+  .description('Deploy the Apiary LLM Gateway AWS CDK stack')
   .action(createStack);
 
 program
   .command('destroy')
-  .description('Destroy the AI Gateway AWS CDK stack')
+  .description('Destroy the Apiary LLM Gateway AWS CDK stack')
   .action(destroyStack);
 
 program
@@ -44,17 +44,17 @@ program
 
 program
   .command('get-usage-plans')
-  .description('View all usage plans associated with the AI Gateway')
+  .description('View all usage plans associated with the Apiary LLM Gateway')
   .action(getUsagePlans);
 
 program
   .command('delete-usage-plan')
-  .description('Delete a specific usage plan associated with the AI Gateway')
+  .description('Delete a specific usage plan associated with the Apiary LLM Gateway')
   .action(deleteUsagePlan);
 
 program
   .command('edit-usage-plan')
-  .description('Edit a specific usage plan associated with the AI Gateway')
+  .description('Edit a specific usage plan associated with the Apiary LLM Gateway')
   .action(editUsagePlan);
 
 program.parse(process.argv);

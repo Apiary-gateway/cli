@@ -8,6 +8,6 @@ export async function getUsagePlans() {
     delete plan.apiStages;
   }
 
-  console.log('☑️ Here are the current usage plans associated with your AI Gateway: ');
+  console.log('🐝 Here are the current usage plans associated with your Apiary Gateway: ');
   console.log(plans);
 }

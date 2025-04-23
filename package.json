@@ -1,8 +1,12 @@
 {
-  "name": "cli",
+  "name": "@apiary-gateway/cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CLI for managing Apiary LLM Gateway",
+  "main": "dist/bin/index.js",
+  "types": "dist/bin/index.d.ts",
+  "bin": {
+    "apiary": "./dist/bin/index.js"
+  },
   "scripts": {
     "start": "ts-node bin/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +24,8 @@
     "@aws-sdk/client-secrets-manager": "^3.782.0",
     "commander": "^13.1.0",
     "inquirer": "^12.5.2"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

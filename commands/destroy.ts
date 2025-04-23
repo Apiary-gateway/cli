@@ -4,8 +4,8 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-// TODO: change this path? align w/ create, at any rate
-const stackPath = path.join(os.homedir(), 'aiGatewayStack', 'cdk-stack');
+const repoName = 'gateway';
+const targetDir = path.join(process.cwd(), repoName);
 
 export async function destroyStack() {
   const { confirmDestroy } = await inquirer.prompt([
@@ -24,8 +24,12 @@ export async function destroyStack() {
   }
   
   try {
-    console.log('🧨 Destroying CDK stack...');
-    execSync('npx cdk destroy', { cwd: stackPath, stdio: 'inherit' });
+    if (!fs.existsSync(targetDir)) {
+      throw new Error(`Could not find target directory ${targetDir}. Please ensure target directory with cloned Apiary stack exists.`)
+    }
+
+    console.log('🧨 Destroying Apiary CDK stack...');
+    execSync('npx cdk destroy', { cwd: targetDir, stdio: 'inherit' });
   } catch (err) {
     console.error('❌ Failed to destroy stack: ', err);
     process.exit(1);

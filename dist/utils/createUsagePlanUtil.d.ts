@@ -1,0 +1,1 @@
+export declare function createUsagePlanUtil(name: string, rateLimit: number, burstLimit?: number, quotaLimit?: number, quotaPeriod?: 'DAY' | 'WEEK' | 'MONTH'): Promise<import("@aws-sdk/client-api-gateway").CreateUsagePlanCommandOutput>;

@@ -27,7 +27,7 @@ export async function deleteAPIKeys() {
     });
 
     await client.send(command);
-    console.log('🌠 Deleted LLM provider API keys');
+    console.log('🐝 Deleted LLM provider API keys');
   } catch (err) {
     console.error(`❌ Failed to delete LLM provider API keys: `, err);
   }

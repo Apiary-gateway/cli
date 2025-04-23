@@ -36,7 +36,7 @@ export async function editUsagePlan() {
   
   try {
     await editUsagePlanUtil(usagePlanId, rateLimit, burstLimit, quotaPeriod, quotaLimit);
-    console.log('🌠 Successfully updated usage plan');
+    console.log('🐝 Successfully updated usage plan');
   } catch (err) {
     console.error('❌ Failed to update usage plan: ', err);
   }

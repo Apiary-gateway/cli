@@ -4,8 +4,6 @@ import { SecretsManagerClient, UpdateSecretCommand } from '@aws-sdk/client-secre
 const client = new SecretsManagerClient();
 const SECRET_NAME = 'llm-provider-api-keys';
 
-// check how defaults show up
-
 export async function updateAPIKeys() {
   const apiKeys = await inquirer.prompt([
     {
@@ -40,7 +38,7 @@ export async function updateAPIKeys() {
     });
 
     await client.send(command);
-    console.log('🌠 Updated LLM provider API keys');
+    console.log('🐝 Updated LLM provider API keys');
   } catch (err) {
     console.error(`❌ Failed to update LLM provider API keys: `, err);
   }
