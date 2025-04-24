@@ -28,7 +28,7 @@ async function deleteAPIKeys() {
             SecretString: '{"ANTHROPIC_API_KEY": "", "GEMINI_API_KEY": "", "OPENAI_API_KEY": ""}',
         });
         await client.send(command);
-        console.log('🌠 Deleted LLM provider API keys');
+        console.log('🐝 Deleted LLM provider API keys');
     }
     catch (err) {
         console.error(`❌ Failed to delete LLM provider API keys: `, err);

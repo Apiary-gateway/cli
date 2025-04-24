@@ -28,7 +28,7 @@ Run `npm install -g @apiary-gateway/cli`
 
 ### First Time Usage
 
-Running `apiary create` will clone the Apiary CDK infrastructure into a new `gateway` folder inside your current working directory. Make sure you're in the directory where you want the `gateway` folder to be created before running the command.
+Running `apiary create` will clone the Apiary CDK infrastructure into a new `apiary` folder inside your current working directory. Make sure you're in the directory where you want the `apiary` folder to be created before running the command.
 
 Upon running `apiary create`, you'll be prompted to provide your LLM provider API
 keys as part of the deployment process.

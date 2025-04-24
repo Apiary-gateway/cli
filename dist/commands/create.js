@@ -12,37 +12,46 @@ const checkAwsCdkCliInstall_1 = require("../utils/checkAwsCdkCliInstall");
 const cdkBootstrap_1 = require("../utils/cdkBootstrap");
 const checkBedrockAccess_1 = require("../utils/checkBedrockAccess");
 const fs_1 = __importDefault(require("fs"));
-const os_1 = __importDefault(require("os"));
 const path_1 = __importDefault(require("path"));
-const stackPath = path_1.default.join(os_1.default.homedir(), 'aiGatewayStack', 'cdk-stack');
-const cdkRepo = 'https://github.com/Sporkway/gateway.git';
+const cdkRepo = 'https://github.com/Apiary-gateway/gateway.git';
+const targetDir = path_1.default.join(process.cwd(), 'apiary');
+const frontendDir = path_1.default.join(targetDir, 'frontend-ui');
 async function createStack() {
     try {
-        console.log(`📩 Cloning CDK stack into directory: ${stackPath}`);
-        if (!fs_1.default.existsSync(stackPath)) {
-            fs_1.default.mkdirSync(stackPath, { recursive: true });
-            (0, child_process_1.execSync)(`git clone ${cdkRepo} ${stackPath}`, { stdio: 'inherit' });
+        if (!fs_1.default.existsSync(targetDir)) {
+            console.log(`📩 Cloning CDK stack into ${targetDir}...`);
+            (0, child_process_1.execSync)(`git clone ${cdkRepo} ${targetDir}`, { stdio: 'inherit' });
         }
         else {
-            (0, child_process_1.execSync)(`git -C ${stackPath} pull`, { stdio: 'inherit' });
+            if (!fs_1.default.existsSync(path_1.default.join(targetDir, '.git'))) {
+                throw new Error(`Can't clone CDK stack into existing directory ${targetDir} as it is not a valid Git repo`);
+            }
+            console.log(`🔄 Apiary repo already exists. Pulling latest changes in ${targetDir}...`);
+            (0, child_process_1.execSync)(`git -C ${targetDir} pull`, { stdio: 'inherit' });
         }
-        console.log('📦 Installing dependencies...');
-        (0, child_process_1.execSync)('npm install', { cwd: stackPath, stdio: 'inherit' });
+        console.log('📦 Installing CDK stack dependencies...');
+        (0, child_process_1.execSync)('npm install', { cwd: targetDir, stdio: 'inherit' });
+        if (fs_1.default.existsSync(frontendDir)) {
+            console.log('📦 Installing front-end dashboard dependencies...');
+            (0, child_process_1.execSync)('npm install', { cwd: frontendDir, stdio: 'inherit' });
+            console.log('🛠️ Building front-end dashboard...');
+            (0, child_process_1.execSync)('npm run build', { cwd: frontendDir, stdio: 'inherit' });
+        }
         (0, checkAwsCliInstall_1.checkAwsCliInstall)();
         (0, checkAwsCdkCliInstall_1.checkAwsCdkCliInstall)();
-        (0, cdkBootstrap_1.cdkBootstrap)(stackPath);
+        (0, cdkBootstrap_1.cdkBootstrap)(targetDir);
         (0, checkBedrockAccess_1.checkBedrockAccess)();
         console.log('🚀 Deploying CDK stack...');
-        (0, child_process_1.execSync)('npx cdk deploy --require-approval never', { cwd: stackPath, stdio: 'inherit' });
+        (0, child_process_1.execSync)('npx cdk deploy --require-approval never', { cwd: targetDir, stdio: 'inherit' });
         console.log('🔐 Please enter your LLM provider API keys to be stored with Secrets Manager:');
         await (0, updateAPIKeys_1.updateAPIKeys)();
         console.log('✅ LLM provider API keys have been stored.');
         const key = await (0, getInitialGatewayKey_1.getInitialGatewayKey)();
-        console.log('🗝️ You can use this API key to begin making requests with AI Gateway ', '(please save this key securely for future reference): ', key);
-        console.log('🌠 Deployment complete!');
+        console.log('🗝️ You can use this API key to begin making requests with Apiary ', '(please save this key securely for future reference): ', key);
+        console.log('🐝 Deployment complete!');
     }
     catch (err) {
-        console.error('❌ AI Gateway stack deployment failed: ', err);
+        console.error('❌ Apiary deployment failed: ', err);
         process.exit(1);
     }
 }

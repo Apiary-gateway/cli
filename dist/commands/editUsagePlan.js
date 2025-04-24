@@ -39,7 +39,7 @@ async function editUsagePlan() {
     let { usagePlanId, rateLimit, burstLimit, quotaPeriod, quotaLimit } = usagePlanSpecs;
     try {
         await (0, editUsagePlanUtil_1.editUsagePlanUtil)(usagePlanId, rateLimit, burstLimit, quotaPeriod, quotaLimit);
-        console.log('🌠 Successfully updated usage plan');
+        console.log('🐝 Successfully updated usage plan');
     }
     catch (err) {
         console.error('❌ Failed to update usage plan: ', err);

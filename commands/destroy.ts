@@ -1,11 +1,9 @@
 import { execSync } from 'child_process';
 import inquirer from 'inquirer';
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
 
-const repoName = 'gateway';
-const targetDir = path.join(process.cwd(), repoName);
+const targetDir = path.join(process.cwd(), 'apiary');
 
 export async function destroyStack() {
   const { confirmDestroy } = await inquirer.prompt([

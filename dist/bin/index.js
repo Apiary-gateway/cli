@@ -21,7 +21,7 @@ program
     .action(create_1.createStack);
 program
     .command('destroy')
-    .description('Destroy the AI Gateway AWS CDK stack')
+    .description('Destroy the Apiary LLM Gateway AWS CDK stack')
     .action(destroy_1.destroyStack);
 program
     .command('update-llm-api-keys')
@@ -37,14 +37,14 @@ program
     .action(createUsagePlanWithKey_1.createUsagePlanWithKey);
 program
     .command('get-usage-plans')
-    .description('View all usage plans associated with the AI Gateway')
+    .description('View all usage plans associated with the Apiary LLM Gateway')
     .action(getUsagePlans_1.getUsagePlans);
 program
     .command('delete-usage-plan')
-    .description('Delete a specific usage plan associated with the AI Gateway')
+    .description('Delete a specific usage plan associated with the Apiary LLM Gateway')
     .action(deleteUsagePlan_1.deleteUsagePlan);
 program
     .command('edit-usage-plan')
-    .description('Edit a specific usage plan associated with the AI Gateway')
+    .description('Edit a specific usage plan associated with the Apiary LLM Gateway')
     .action(editUsagePlan_1.editUsagePlan);
 program.parse(process.argv);

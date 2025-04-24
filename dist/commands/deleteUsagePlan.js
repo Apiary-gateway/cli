@@ -28,7 +28,7 @@ async function deleteUsagePlan() {
     }
     try {
         await (0, deleteUsagePlanUtil_1.deleteUsagePlanUtil)(usagePlanId);
-        console.log(`✅ Successfully deleted usage plan with ID '${usagePlanId}'`);
+        console.log(`🐝 Successfully deleted usage plan with ID '${usagePlanId}'`);
     }
     catch (err) {
         console.error('❌ Failed to delete usage plan: ', err);

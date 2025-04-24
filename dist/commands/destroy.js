@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.destroyStack = destroyStack;
 const child_process_1 = require("child_process");
 const inquirer_1 = __importDefault(require("inquirer"));
-const os_1 = __importDefault(require("os"));
+const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-// TODO: change this path? align w/ create, at any rate
-const stackPath = path_1.default.join(os_1.default.homedir(), 'aiGatewayStack', 'cdk-stack');
+const targetDir = path_1.default.join(process.cwd(), 'apiary');
 async function destroyStack() {
     const { confirmDestroy } = await inquirer_1.default.prompt([
         {
@@ -25,8 +24,11 @@ async function destroyStack() {
         return;
     }
     try {
-        console.log('🧨 Destroying CDK stack...');
-        (0, child_process_1.execSync)('npx cdk destroy', { cwd: stackPath, stdio: 'inherit' });
+        if (!fs_1.default.existsSync(targetDir)) {
+            throw new Error(`Could not find target directory ${targetDir}. Please ensure target directory with cloned Apiary stack exists.`);
+        }
+        console.log('🧨 Destroying Apiary CDK stack...');
+        (0, child_process_1.execSync)('npx cdk destroy', { cwd: targetDir, stdio: 'inherit' });
     }
     catch (err) {
         console.error('❌ Failed to destroy stack: ', err);

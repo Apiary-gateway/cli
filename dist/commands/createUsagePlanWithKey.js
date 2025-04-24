@@ -67,7 +67,7 @@ async function createUsagePlanWithKey() {
         }
         else {
             await (0, addKeyToUsagePlan_1.addKeyToUsagePlan)(usagePlanId, apiKeyId);
-            console.log(`🌠 Created usage plan with API key: ${apiKeyResponse.value}`, '\n🗝️ Please save this API key securely for future reference.');
+            console.log(`🐝 Created usage plan with API key: ${apiKeyResponse.value}`, '\n🗝️ Please save this API key securely for future reference.');
         }
     }
     catch (err) {

@@ -8,7 +8,6 @@ const inquirer_1 = __importDefault(require("inquirer"));
 const client_secrets_manager_1 = require("@aws-sdk/client-secrets-manager");
 const client = new client_secrets_manager_1.SecretsManagerClient();
 const SECRET_NAME = 'llm-provider-api-keys';
-// check how defaults show up
 async function updateAPIKeys() {
     const apiKeys = await inquirer_1.default.prompt([
         {
@@ -40,7 +39,7 @@ async function updateAPIKeys() {
             SecretString: `{"ANTHROPIC_API_KEY": "${anthropicAPIKey}", "GEMINI_API_KEY": "${geminiAPIKey}", "OPENAI_API_KEY": "${openaiAPIKey}"}`,
         });
         await client.send(command);
-        console.log('🌠 Updated LLM provider API keys');
+        console.log('🐝 Updated LLM provider API keys');
     }
     catch (err) {
         console.error(`❌ Failed to update LLM provider API keys: `, err);

@@ -9,9 +9,8 @@ import fs from 'fs';
 import path from 'path';
 import { error } from 'console';
 
-const cdkRepo = 'https://github.com/Sporkway/gateway.git';
-const repoName = 'gateway';
-const targetDir = path.join(process.cwd(), repoName);
+const cdkRepo = 'https://github.com/Apiary-gateway/gateway.git';
+const targetDir = path.join(process.cwd(), 'apiary');
 const frontendDir = path.join(targetDir, 'frontend-ui');
 
 export async function createStack() {
