@@ -1,7 +1,7 @@
 {
   "name": "@apiary-gateway/cli",
-  "version": "1.0.2",
-  "description": "CLI for managing Apiary LLM Gateway",
+  "version": "1.0.3",
+  "description": "CLI for managing the Apiary LLM Gateway",
   "main": "dist/bin/index.js",
   "types": "dist/bin/index.d.ts",
   "bin": {
