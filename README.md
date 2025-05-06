@@ -66,7 +66,7 @@ Once deployed, the Apiary CLI will output:
 - An `AiGatewayRestApiEndpoint` URL - you can start sending LLM requests to this URL using the [Apiary SDK](https://github.com/Apiary-gateway/clientSDK)
 - An API key to use when sending requests to your Apiary instance. Please save this key securely for future reference
   - You can manage API keys and usage plans for your Apiary instance using the [commands](#commands) below
-- A `FrontendBucketUrl` URL - visit this URL to access the Observability and Management 
+- A `FrontendCloudFrontUrl` URL - visit this URL to access the Observability and Management 
 Dashboard. Use the dashboard to:
   - Set custom routing rules for your Apiary instance
   - Configure caching and guardrails settings
